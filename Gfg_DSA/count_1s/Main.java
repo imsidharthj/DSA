@@ -26,21 +26,35 @@ class Main {
 }
 
 class Solution{
-    // Function to count number of ones in the binary array
-    // N: size of array
-    // arr[]: input array
-    public static int countOnes(int arr[], int N){
-        int l = 0;
-        int h = N - 1;
-        while (l <= h){
-            int mid = (l + h)/ 2;
-            if (arr[mid] == 1){
-                l = mid + 1;
-            }
-            else
-                h = mid - 1;
-        }
-        return h + 1;
+    // public static int countOnes(int arr[], int N){
+    //     int l = 0;
+    //     int h = N - 1;
+    //     while (l <= h){
+    //         int mid = (l + h)/ 2;
+    //         if (arr[mid] == 1){
+    //             l = mid + 1;
+    //         }
+    //         else
+    //             h = mid - 1;
+    //     }
+    //     return h + 1;
         
+    // }
+
+    public static int countOnes(int arr[], int N){
+        return countOnes(arr, 0, N - 1);
+    }
+    public static int countOnes(int arr[], int l, int h) {
+        if (l > h) {
+            return 0;
+        }
+
+        int mid = (l + h) / 2;
+
+        if (arr[mid] == 1) {
+            return (mid - l + 1) + countOnes(arr, mid + 1, h); // Count ones in the right half and add 1 for the current one
+        } else {
+            return countOnes(arr, l, mid - 1); // Search the left half
+        }
     }
 }
