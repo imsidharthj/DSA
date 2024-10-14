@@ -20,7 +20,6 @@ public class Main {
 }
 
 class Solution {
-    // Function to search key in a Row wise And Column wise Sorted Array.
     public static Pair findKey(int[][] arr, int key) {
         int n = arr.length;
         int m = arr[0].length;

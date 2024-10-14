@@ -2,7 +2,7 @@ public class Main {
     public static void main(String[] args) {
         Generate generate = new Generate();
         int[] arr = {3, 4, 5, 6, 7, 1, 2, 2, 2, 3, 3};
-        int k = 3;
+        int k = 7;
         
         int[] result = generate.leftRightSearch(arr, arr.length, k);
         
@@ -17,58 +17,92 @@ public class Main {
 }
 
 class Generate {
-    // Function to find first or last occurrence of k.
-    public int countOccurence(int[] arr, int n, int k, boolean isFirst) {
-        int l = 0;
-        int h = n - 1;
+    public int countOccurence(int[] arr, int l, int h, int k, boolean isFirst) {
+        // int l = 0;
+        // int h = n - 1;
         int result = -1;
         
         while (l <= h) {
-            int mid = (l + h) / 2;
+            int mid = l + (h - l) / 2;
 
-            // If element found at mid, record result and keep searching for first or last
             if (arr[mid] == k) {
                 result = mid;
                 if (isFirst) {
-                    h = mid - 1;  // Move left for first occurrence
+                    h = mid - 1;
                 } else {
-                    l = mid + 1;  // Move right for last occurrence
+                    l = mid + 1;
                 }
+            } else if (arr[mid] < k) {
+                l = mid + 1;
+            } else {
+                h = mid - 1;
             }
-            // if (arr[mid] == h && arr[mid] == h){
-            //     l++;
-            //     h--;
-            //     continue;
+            // // If the left half is sorted
+            // else if (arr[l] <= arr[mid]) {
+            //     if (arr[l] <= k && k < arr[mid]) {
+            //         h = mid - 1;  // Search left side
+            //     } else {
+            //         l = mid + 1;  // Search right side
+            //     }
+            // } 
+            // // If the right half is sorted
+            // else {
+            //     if (arr[mid] < k && k <= arr[h]) {
+            //         l = mid + 1;  // Search right side
+            //     } else {
+            //         h = mid - 1;  // Search left side
+            //     }
             // }
-            // If the left half is sorted
-            else if (arr[l] <= arr[mid]) {
-                if (arr[l] <= k && k < arr[mid]) {
-                    h = mid - 1;  // Search left side
-                } else {
-                    l = mid + 1;  // Search right side
-                }
-            } 
-            // If the right half is sorted
-            else {
-                if (arr[mid] < k && k <= arr[h]) {
-                    l = mid + 1;  // Search right side
-                } else {
-                    h = mid - 1;  // Search left side
-                }
-            }
         }
-        
         return result;
     }
 
-    // Function to find both first and last occurrences.
-    public int[] leftRightSearch(int[] arr, int n, int k) {
-        int left = countOccurence(arr, n, k, true);  // First occurrence
-        int right = countOccurence(arr, n, k, false); // Last occurrence
+    public int minElement(int []arr){
+        int l = 0;
+        int h = arr.length - 1;
+        // int ans = Integer.MAX_VALUE;
         
-        if (left == -1 || right == -1) {
+        while (l <= h) {
+            int mid = l + (h - l) / 2;
+        
+            if(arr[l] < arr[h]){
+                return l;
+                // ans = Math.min(ans, arr[l]);
+                // break;
+            } else if (arr[l] <= arr[mid]) {
+                // ans = Math.min(ans, arr[l]);
+                l = mid + 1;
+            }  else {
+                // ans = Math.min(ans, arr[mid]);
+                h = mid;
+            }
+        }
+        return l;
+    }
+
+    public int[] leftRightSearch(int[] arr, int n, int k) {
+        int minIndex = minElement(arr);
+        int first = -1, last = -1;
+
+        first = countOccurence(arr, minIndex, n - 1, k, true); // Search in the right side of the rotated array 
+        if (first == -1) {
+            first = countOccurence(arr, 0, minIndex - 1, k, true); 
+        }
+
+        last = countOccurence(arr, 0, minIndex - 1, k, false); // Search in the left side of the rotated array 
+        if (last == -1) {
+            last = countOccurence(arr, minIndex, n - 1, k, false); 
+        }
+        
+        if (first > last) {
+            int temp = first;
+            first = last;
+            last = temp;
+        }
+        
+        if (first == -1 || last == -1) {
             return new int[]{-1, -1};
         }
-        return new int[]{left, right};
+        return new int[]{first, last};
     }
 }
