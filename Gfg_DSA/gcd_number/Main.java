@@ -52,4 +52,16 @@ class Solution{
         int gcd = Collections.max(commonFactors);
         System.out.println("\nGCD: " + gcd);
     }
+
+    public int Gcd(int a, int b){
+        int n = Math.min(a, b);
+        int gcd = 1;
+        for(int i = n; i >= 1; i--){
+            if(a % i == 0 && b % i == 0){
+                gcd = i;
+                break;
+            }
+        }
+        return gcd;
+    }
 }
