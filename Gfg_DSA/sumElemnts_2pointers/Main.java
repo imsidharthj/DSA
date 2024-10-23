@@ -8,26 +8,25 @@ class Main{
         // arr = [1, 2, 3, 4, 5, 9, 8, 7]
         // sum = 16
         // Arrays.sort(arr);
-        // int i = 0;
-        // int j = arr.length - 1;
-        // int k = 0;
-        // int [] arr2 = new int[3];
-        // while (i < j && k == 3){
-        //     int currentSum = arr[i] + arr[j];
-        //     if(currentSum == sum){
-        //         arr2[k++] = arr[i];
-        //         arr2[k++] = arr[j];
-        //         if (k < 3){
-        //             arr2[k++] = 0;
+        // int[] arr2 = new int[3];
+        // for (int k = 0; k < arr.length - 2; k++) {
+        //     int i = k + 1;
+        //     int j = arr.length - 1;
+        //     while (i < j) {
+        //         int currentSum = arr[k] + arr[i] + arr[j];
+        //         if (currentSum == sum) {
+        //             arr2[0] = arr[k];
+        //             arr2[1] = arr[i];
+        //             arr2[2] = arr[j];
+        //             return arr2; // Return the first found triplet
+        //         } else if (currentSum < sum) {
+        //             i++; // Move the left pointer to increase the sum
+        //         } else {
+        //             j--; // Move the right pointer to decrease the sum
         //         }
-        //         break;
-        //     } else if (currentSum < sum){
-        //         i++;
-        //     } else {
-        //         j--;
         //     }
         // }
-        // return arr2;
+        // return new int[]{};
         Arrays.sort(arr);
         return utilTriplets(arr, sum);
     }
