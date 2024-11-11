@@ -61,11 +61,11 @@ class Main{
         int[] arrayOne = new int[middle];
         int[] arrayTwo = new int[length - middle];
         int i = 0; int j = 0;
-        for(; i < length; i++){
-            if(i < middle){
-                arrayOne[i] = arr[i];
+        for(; i < length; i++){ // splitting the original array arr into two subarrays
+            if(i < middle){ // i < middle, it means we're in the first half of the array
+                arrayOne[i] = arr[i]; // value at arr[i] is directly copied to arrayOne[i]
             } else {
-                arrayTwo[j] = arr[i];
+                arrayTwo[j] = arr[i];  // second half of arr, and now arr[i] should be assigned to arrayTwo.
                 j++;
             }
         }
@@ -88,13 +88,13 @@ class Main{
                 r++;
             }
         }
-        while (l < lengthOne) {
-            arr[i] = arrayOne[l];
+        while (l < lengthOne) { // handle any leftover elements in the arrayOne
+            arr[i] = arrayOne[l]; // l is less than lengthOne, then this loop will execute and placing any remaining elements of arrayOne into arr
             i++;
             l++;
         }
-        while (r < lengthtwo) {
-            arr[i] = arrayTwo[r];
+        while (r < lengthtwo) { // handle any leftover elements in the arraytwo
+            arr[i] = arrayTwo[r]; // r is less than lengthtwo, then this loop will execute and placing any remaining elements of arrayTwo into arr
             i++;
             r++;
         }
