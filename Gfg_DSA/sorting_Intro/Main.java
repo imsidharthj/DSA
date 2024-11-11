@@ -52,12 +52,59 @@ class Main{
         arr[i] = arr[j];
         arr[j] = temp;
     }
-
+    public static void sortArrayByMerge(int[] arr){
+        int length = arr.length;
+        if(length <= 1){
+            return;
+        }
+        int middle = length / 2;
+        int[] arrayOne = new int[middle];
+        int[] arrayTwo = new int[length - middle];
+        int i = 0; int j = 0;
+        for(; i < length; i++){
+            if(i < middle){
+                arrayOne[i] = arr[i];
+            } else {
+                arrayTwo[j] = arr[i];
+                j++;
+            }
+        }
+        sortArrayByMerge(arrayOne);
+        sortArrayByMerge(arrayTwo);
+        merge(arr, arrayOne, arrayTwo);
+    }
+    public static void merge(int[] arr, int[] arrayOne, int[] arrayTwo){
+        int i = 0; int l = 0; int r = 0;
+        int lengthOne = arr.length / 2;
+        int lengthtwo = arr.length - lengthOne;
+        while (l < lengthOne && r < lengthtwo){
+            if(arrayOne[l] < arrayTwo[r]){
+                arr[i] = arrayOne[l];
+                i++;
+                l++;
+            } else{
+                arr[i] = arrayTwo[r];
+                i++;
+                r++;
+            }
+        }
+        while (l < lengthOne) {
+            arr[i] = arrayOne[l];
+            i++;
+            l++;
+        }
+        while (r < lengthtwo) {
+            arr[i] = arrayTwo[r];
+            i++;
+            r++;
+        }
+    }
     public static void main(String[] args){
         int[] arr = {13, 47, 24, 52, 20, 9};
         // sortArrayBySeletion(arr);
         // sortArrayByBubble(arr);
-        sortArrayByQuick(arr, 0, arr.length - 1);
+        // sortArrayByQuick(arr, 0, arr.length - 1);
+        sortArrayByMerge(arr);
         System.out.println(Arrays.toString(arr));
     }
 }
