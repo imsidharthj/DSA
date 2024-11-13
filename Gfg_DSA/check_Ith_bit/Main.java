@@ -164,60 +164,83 @@ public class Main {
         return ones;
     }
 
+    public static int[] doubleNumber(int[] arr){
+        int xor = 0;
+        for (int i = 0; i < arr.length; i++) {
+            xor ^= arr[i];
+        }
+        int rightMost = xor & -xor; // Isolate the rightmost set bit
+        int ones = 0, twos = 0;
+        for (int j = 0; j < arr.length; j++) {
+            if ((arr[j] & rightMost) != 0) {
+                ones ^= arr[j];  // XOR elements with the rightmost set bit
+            } else {
+                twos ^= arr[j];  // XOR elements without the rightmost set bit
+            }
+        }
+        return new int[]{ones, twos};
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
         // Test checkBitLeft and checkBitRight
-        // System.out.println("Enter a number n and bit position i for checking bits:");
-        // int n = scanner.nextInt();
-        // int i = scanner.nextInt();
-        // System.out.println("Check bit using left shift (bit " + i + "): " + checkBitLeft(n, i));
-        // System.out.println("Check bit using right shift (bit " + i + "): " + checkBitRight(n, i));
+        System.out.println("Enter a number n and bit position i for checking bits:");
+        int n = scanner.nextInt();
+        int i = scanner.nextInt();
+        System.out.println("Check bit using left shift (bit " + i + "): " + checkBitLeft(n, i));
+        System.out.println("Check bit using right shift (bit " + i + "): " + checkBitRight(n, i));
 
-        // // Test setBit
-        // System.out.println("Set bit at position " + i + ": " + setBit(n, i));
+        // Test setBit
+        System.out.println("Set bit at position " + i + ": " + setBit(n, i));
 
-        // // Test clearBit
-        // System.out.println("Clear bit at position " + i + ": " + clearBit(n, i));
+        // Test clearBit
+        System.out.println("Clear bit at position " + i + ": " + clearBit(n, i));
 
-        // // Test checkPowerOfTwo
-        // System.out.println("Enter a number to check if it's a power of 2:");
-        // int powerOfTwoCheck = scanner.nextInt();
-        // System.out.println("Is " + powerOfTwoCheck + " a power of 2? " + checkPowerOfTwo(powerOfTwoCheck));
+        // Test checkPowerOfTwo
+        System.out.println("Enter a number to check if it's a power of 2:");
+        int powerOfTwoCheck = scanner.nextInt();
+        System.out.println("Is " + powerOfTwoCheck + " a power of 2? " + checkPowerOfTwo(powerOfTwoCheck));
 
-        // // Test countBits and countBits_
-        // System.out.println("Enter a number to count set bits:");
-        // int bitCountNumber = scanner.nextInt();
-        // System.out.println("Number of set bits (using shift): " + countBits(bitCountNumber));
-        // System.out.println("Number of set bits (Brian Kernighan's algorithm): " + countBits_(bitCountNumber));
+        // Test countBits and countBits_
+        System.out.println("Enter a number to count set bits:");
+        int bitCountNumber = scanner.nextInt();
+        System.out.println("Number of set bits (using shift): " + countBits(bitCountNumber));
+        System.out.println("Number of set bits (Brian Kernighan's algorithm): " + countBits_(bitCountNumber));
 
-        // // Test countFlips
-        // System.out.println("Enter two numbers to count bit flips:");
-        // int a = scanner.nextInt();
-        // int b = scanner.nextInt();
-        // System.out.println("Number of bit flips to convert " + a + " to " + b + ": " + countFlips(a, b));
+        // Test countFlips
+        System.out.println("Enter two numbers to count bit flips:");
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        System.out.println("Number of bit flips to convert " + a + " to " + b + ": " + countFlips(a, b));
         
-        // int start = 7; int goal = 10;
-        // int answer = minBitFlips(start, goal);
-        // System.out.println(answer);
+        int start = 7; int goal = 10;
+        int answer = minBitFlips(start, goal);
+        System.out.println(answer);
 
-        // int[] arr = {1, 2, 3};
-        // int[][] result = subSets(arr);
-        // for (int[] subset : result) {
-        //     System.out.print("[");
-        //     for (int num : subset) {
-        //         System.out.print(num + " ");
-        //     }
-        //     System.out.println("]");
-        // }
+        int[] arr = {1, 2, 3};
+        int[][] result = subSets(arr);
+        for (int[] subset : result) {
+            System.out.print("[");
+            for (int num : subset) {
+                System.out.print(num + " ");
+            }
+            System.out.println("]");
+        }
 
-        // int[] arr = {1, 1, 2, 2, 3, 4, 4};
-        // int singleNumber = singleNumber(arr);
-        // System.out.println(singleNumber);
+        int[] arr2 = {1, 1, 2, 2, 3, 4, 4};
+        int singleNumber = singleNumber(arr2);
+        System.out.println(singleNumber);
 
-        int[] arr = {5, 1, 1, 1, 3, 3, 3, 5, 5, 4, 6, 6, 6};
-        int number = singleNumberThree(arr);
+        int[] arr3 = {5, 1, 1, 1, 3, 3, 3, 5, 5, 4, 6, 6, 6};
+        int number = singleNumberThree(arr3);
         System.out.println(number);
+
+        int[] arr4 = {1, 2, 1, 4, 5, 6, 4, 2};
+        int[] result2 = doubleNumber(arr4);
+        for (int num : result2) {
+            System.out.print(num + " ");
+        }
         scanner.close();
     }
 }
