@@ -31,10 +31,30 @@ class Main{
         }
         return answer;
     }
+    public static int kokoEatingBananas(int[] piles, int time){
+        int speed = 1;
+        int totalTime = 0;
+        int k = 0;
+        while(k < piles.length){
+            totalTime += Math.ceil((double)piles[k] / speed);
+            if(totalTime > time){
+                speed++;
+                totalTime = 0;
+                k = 0;
+            }
+            k++;
+        }
+        return speed;
+    }
     public static void main(String[] args){
-        int number = 64;
-        int times = 3;
-        int sqrt = squreRootTwo(times, number);
-        System.out.println(sqrt);
-    }   
+        // int number = 64;
+        // int times = 3;
+        // int sqrt = squreRootTwo(times, number);
+        // System.out.println(sqrt);
+
+        int[] piles = {3, 6, 7, 11};
+        int time = 8;
+        int speed = kokoEatingBananas(piles, time);
+        System.out.println(speed);
+    }
 }
