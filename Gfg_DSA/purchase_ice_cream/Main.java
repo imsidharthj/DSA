@@ -40,18 +40,13 @@ class Solution{
         //     i++;
         // }
         // return count;
-        ArrayList <Integer> list = new ArrayList<>();
+
         HashMap<Integer, Integer> lastIndex = new HashMap<>();
         long count = 0;
-        for(int i = 0; i < n; i++){
-            int flavor = a[i];
-            if(lastIndex.containsKey(flavor)){
-                int j = lastIndex.get(flavor);
-                if(Math.abs(i - j) >= k){
-                    count++;
-                }
-            }
-            lastIndex.put(flavor, i);
+        for(int i = k; i < n; i++){
+            // int flavor = a[i];
+            lastIndex.put(a[i - k], lastIndex.getOrDefault(a[i - k], 0) + 1);
+            count += lastIndex.getOrDefault(a[i], 0);
         }
         return count;
     }
