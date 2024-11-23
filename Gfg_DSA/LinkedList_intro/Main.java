@@ -42,14 +42,32 @@ class Main{
         }
         return 0;
     }
-    public static Node deleteNode(Node head) {
-        Node secondLast  = head;
-        Node last = head;
-        while (last.next != null) {
-            secondLast = last;
-            last = last.next;
+    public static Node deleteKthNode(Node head, int k) {
+        if(k <= 0 || head == null){return head;}
+        
+        // Node secondLast  = head;
+        // Node last = head;
+        // while (last.next != null) {
+        //     secondLast = last;
+        //     last = last.next;
+        // }
+        // secondLast.next = null;
+        
+        if (k == 1) {
+            return head.next;
+        }    
+        Node prev = null;
+        Node current = head;
+        int count = 1;
+    
+        while (current != null && count <= k) {
+            prev = current;
+            current = current.next;
+            count++;
+            if(count == k){
+                prev.next = current.next;
+            }
         }
-        secondLast.next = null;
         return head;
     }
     public static void main(String[] args){
@@ -57,11 +75,12 @@ class Main{
         Node head = convertArrayToLL(arr);
         printLinkedList(head);
         
-        // int find = 5;
-        // int result = searchLL(head, find);
-        // System.out.println(result);
+        int find = 5;
+        int result = searchLL(head, find);
+        System.out.println(result);
 
-        head = deleteNode(head);
+        int k = 3;
+        head = deleteKthNode(head, k);
         printLinkedList(head);
     }
 }
