@@ -70,6 +70,27 @@ class Main{
         }
         return head;
     }
+    public static Node addKthNode(Node head, int k, int element) {
+        if (k == 1) {
+            Node newNode = new Node(element);
+            newNode.next = head; // Insert at the head (k == 1)
+            return newNode;
+        }
+        int count = 1;
+        Node temp = head;
+        while (temp != null && count < k - 1) { // Traverse to the (k-1)th node
+            temp = temp.next;
+            count++;
+        }
+        if (temp == null) { // Validate k is within range
+            System.out.println("Invalid position. Node cannot be added.");
+            return head;
+        }
+        Node newNode = new Node(element); // Insert the new node
+        newNode.next = temp.next; // Link new node to the k-th node
+        temp.next = newNode; // Link (k-1)th node to the new node
+        return head;
+    }
     public static void main(String[] args){
         int[] arr = {12, 5, 6, 8};
         Node head = convertArrayToLL(arr);
@@ -81,6 +102,11 @@ class Main{
 
         int k = 3;
         head = deleteKthNode(head, k);
+        printLinkedList(head);
+
+        int position = 2;
+        int element = 10;
+        addKthNode(head, position, element);
         printLinkedList(head);
     }
 }
