@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 
 class Main{
@@ -34,6 +35,19 @@ class Main{
         return minCost;
     }
 
+    public static int minPath(int grid[][], int[][] dp, int row, int col){
+
+        if (row == 0 && col == 0) return grid[row][col];
+
+        if (dp[row][col] != -1) return dp[row][col];
+
+        int fromTop = (row > 0) ? minPath(grid, dp, row - 1, col) : Integer.MAX_VALUE;
+        int fromLeft = (col > 0) ? minPath(grid, dp, row, col - 1) : Integer.MAX_VALUE;
+
+        dp[row][col] = grid[row][col] + Math.min(fromTop, fromLeft);
+        return dp[row][col];
+    }
+
     public static void main(String[]args){
         // int n = 10;
         // int[] dp = new int[n + 1];
@@ -45,10 +59,22 @@ class Main{
         // int result = fibonachiItrately(n);
         // System.out.println("Fibonacci of " + n + " is " + result);
 
-        HashMap<Integer,Integer> dp = new HashMap<>();
-        int[] cost = {10, 15, 20};
-        int n = cost.length;
-        int result = minStep(n, dp, cost);
-        System.out.println(result);
+        // HashMap<Integer,Integer> dp = new HashMap<>();
+        // int[] cost = {10, 15, 20};
+        // int n = cost.length;
+        // int result = minStep(n, dp, cost);
+        // System.out.println(result);
+
+        int[][] grid = {{1,3,1},
+                        {1,5,1},
+                        {4,2,1}};
+        int row = grid.length;
+        int col = grid[0].length;
+        int[][] dp = new int[row][col];
+        for (int[] rowArray : dp) {
+            Arrays.fill(rowArray, -1);
+        }
+        int result = minPath(grid, dp, row - 1, col - 1);
+        System.out.println("Minimum Path Sum: " + result);
     }
 }
