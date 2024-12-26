@@ -9,7 +9,7 @@ public class SimpleBankingSystem {
     public static void main(String[] args) {
         // Initial menu
         while (true) {
-            System.out.println("Easy Finance Bank");
+            System.out.println("Welcome to Easy Finance Bank");
             System.out.println("1. Create Account");
             System.out.println("2. Login to account");
             System.out.println("3. Quit");

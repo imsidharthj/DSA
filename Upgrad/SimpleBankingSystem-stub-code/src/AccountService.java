@@ -14,9 +14,9 @@ public class AccountService {
     public Account createAccount(String name, int pin){
         Account newAccount = new Account(name, pin);
         accounts.add(newAccount);
-        System.out.println("================================");
+        // System.out.println("================================");
         System.out.println("Account created successfully. Account number: " + newAccount.getAccountNumber());
-        System.out.println("================================");
+        // System.out.println("================================");
         System.out.println();
         return newAccount;
     }
@@ -43,9 +43,9 @@ public class AccountService {
             return;
         }
         account.setBalance(account.getBalance() + amount);
-        System.out.println("=================================");
+        // System.out.println("=================================");
         System.out.println("Deposit successful. Updated balance: $" + account.getBalance());
-        System.out.println("=================================");
+        // System.out.println("=================================");
         System.out.println();
     }
 
@@ -92,9 +92,9 @@ public class AccountService {
         recipientAccount.setBalance(recipientAccount.getBalance() + amount);
     
         // Print the transfer success message with the sender's updated balance
-        System.out.println("=================================");
+        // System.out.println("=================================");
         System.out.println("Transfer successful. Updated balance: $" + senderAccount.getBalance());
-        System.out.println("=================================");
+        // System.out.println("=================================");
         System.out.println();
     }
 
