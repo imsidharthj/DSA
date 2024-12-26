@@ -3,7 +3,7 @@ import java.util.*;
 import java.text.*;
 import java.math.*;
 import java.util.regex.*;
-// stores word definitions. Implement a Dictionary class that uses a Map to store word-to-definition mappings
+
 public class Main {
     static class Dictionary {
         private Map<String, String> wordDefinitions;
