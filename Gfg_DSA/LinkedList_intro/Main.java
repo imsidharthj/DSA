@@ -91,6 +91,62 @@ class Main{
         temp.next = newNode; // Link (k-1)th node to the new node
         return head;
     }
+    public static Node addBeforeNthNode(Node head, int element, int n){
+        // if(head == null){
+        //     return null;
+        // }
+        // if(head.data == n){
+        //     return new Node(element);
+        // }
+        // Node temp = head;
+        // while (temp.next != null) {
+        //     if(temp.next.data == n){
+        //         Node x = new Node(element);
+        //         temp.next = x;
+        //         break;
+        //     }
+        //     temp = temp.next;
+        // }
+        // return head;
+        if (n <= 1) { // Insert at the beginning
+            Node newNode = new Node(element);
+            newNode.next = head;
+            return newNode;
+        }
+
+        Node temp = head;
+        for (int i = 1; i < n - 1 && temp != null; i++) {
+            temp = temp.next;
+        }
+
+        if (temp == null) {
+            System.out.println("Position out of range. Element not added.");
+            return head;
+        }
+
+        Node newNode = new Node(element);
+        newNode.next = temp.next;
+        temp.next = newNode;
+
+        return head;
+    }
+    public static Node removeNthFromEnd(Node head, int n){
+        Node dummy = new Node(0);
+        dummy.next = head;
+
+        Node slowPointer = dummy;
+        Node fastPointer = dummy;
+
+        while (fastPointer.next != null) {
+            if(n <= 0){
+                slowPointer = slowPointer.next;
+            }
+            fastPointer = fastPointer.next;
+            n -= 1;
+        }
+        slowPointer.next = slowPointer.next.next;
+        return dummy.next;
+    }
     public static void main(String[] args){
         int[] arr = {12, 5, 6, 8};
         Node head = convertArrayToLL(arr);
@@ -107,6 +163,14 @@ class Main{
         int position = 2;
         int element = 10;
         addKthNode(head, position, element);
+        printLinkedList(head);
+
+        head = addBeforeNthNode(head, 10, 3);
+        System.out.println("After adding 10 before the 3rd node:");
+        printLinkedList(head);
+
+        head = removeNthFromEnd(head, 2);
+        System.out.println("After removing the 2nd node from the end:");
         printLinkedList(head);
     }
 }
